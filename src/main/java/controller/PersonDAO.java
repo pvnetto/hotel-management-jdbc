@@ -1,6 +1,5 @@
 package controller;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,14 +7,12 @@ import java.sql.Statement;
 
 import model.Person;
 
-public class PersonDAO {
-	private Connection connection;
+public class PersonDAO extends AbstractDAO {
 	
-	public PersonDAO() throws SQLException{
-		connection = DBConnection.getConnection();
-		connection.setAutoCommit(false);
+	public PersonDAO() throws SQLException {
+		super();
 	}
-	
+
 	// Prepares the statement and returns the ID, but doesn't complete the commit
 	public int insertPerson(Person person) throws SQLException {
 		String pessoaSQL = "INSERT INTO Pessoa values(default, ?, ?)";

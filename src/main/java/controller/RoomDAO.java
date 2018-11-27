@@ -1,6 +1,5 @@
 package controller;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,15 +7,12 @@ import java.sql.SQLException;
 import model.Room;
 import model.RoomType;
 
-public class RoomDAO {
-	
-	private Connection connection;
+public class RoomDAO extends AbstractDAO {
 	
 	public RoomDAO() throws SQLException {
-		connection = DBConnection.getConnection();
-		connection.setAutoCommit(false);
+		super();
 	}
-	
+
 	public void insertRoomType(RoomType roomType) throws SQLException {
 		String insertRoomTypeSQL = "INSERT INTO TipoQuarto VALUES(default, ?)";
 		PreparedStatement pst = connection.prepareStatement(insertRoomTypeSQL);

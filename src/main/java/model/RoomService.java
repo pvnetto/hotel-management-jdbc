@@ -1,16 +1,20 @@
 package model;
 
+import java.security.Provider.Service;
+
 public class RoomService {
 	
 	private int idRoomService;
 	private Room room;
 	private Employee employee;
 	private String description;
+	private ServiceStatus serviceStatus;
 	
-	public RoomService(Room room, Employee employee, String description) {
+	public RoomService(Room room, Employee employee, String description, ServiceStatus serviceStatus) {
 		this.room = room;
 		this.employee = employee;
 		this.description = description;
+		this.serviceStatus = serviceStatus;
 	}
 
 	public int getIdRoomService() {
@@ -43,6 +47,14 @@ public class RoomService {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public ServiceStatus getServiceStatus() {
+		return serviceStatus;
+	}
+
+	public void setServiceStatus(ServiceStatus serviceStatus) {
+		this.serviceStatus = serviceStatus;
 	}
 	
 }

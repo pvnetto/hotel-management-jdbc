@@ -1,6 +1,5 @@
 package controller;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,15 +7,12 @@ import java.sql.Statement;
 
 import model.Customer;
 
-public class CustomerDAO {
-	
-	private Connection connection;
+public class CustomerDAO extends AbstractDAO {
+
 	private PersonDAO personDAO;
 	
 	public CustomerDAO() throws SQLException {
-		connection = DBConnection.getConnection();
-		connection.setAutoCommit(false);
-		
+		super();
 		personDAO = new PersonDAO();
 	}
 	
@@ -44,6 +40,23 @@ public class CustomerDAO {
 		connection.commit();
 		pst.close();
 		System.out.println("> Successfully inserted " + customer.getName() + " as a customer!");
+	}
+	
+	public Customer selectCustomerByCPF(String cpf) throws SQLException {
+		Customer customer = new Customer();
+		String selectCustomerByCpfSQL = "SELECT c.idCliente FROM Cliente c, Fisica f WHERE c.idPessoa = f.idPessoa and f.cpf = ?";
+		PreparedStatement pst = connection.prepareStatement(selectCustomerByCpfSQL);
+		pst.setString(1, cpf);
+		
+		ResultSet resultSet = pst.executeQuery();
+		resultSet.next();
+		
+		customer.setIdCustomer(resultSet.getInt("idCliente"));
+		
+		connection.commit();
+		pst.close();
+		
+		return customer;
 	}
 	
 }

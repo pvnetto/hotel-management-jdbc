@@ -1,4 +1,4 @@
-DROP SCHEMA public CASCADE;
+﻿DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
 
 CREATE TABLE Pessoa (
@@ -75,6 +75,7 @@ CREATE TABLE Servico (
 	idQuarto INTEGER NOT NULL REFERENCES Quarto,
 	idFuncionario INTEGER NOT NULL REFERENCES Funcionario,
 	descricao VARCHAR(200),
+	statusServico VARCHAR(45) NOT NULL,
 	PRIMARY KEY(idServico)
 );
 
@@ -83,6 +84,7 @@ CREATE TABLE Avaliacao (
 	idQuarto INTEGER NOT NULL REFERENCES Quarto,
 	idCliente INTEGER NOT NULL REFERENCES Cliente,
 	nota INTEGER NOT NULL,
+	comentario VARCHAR(255),
 	PRIMARY KEY(idAvaliacao)
 );
 
@@ -110,5 +112,14 @@ CREATE TABLE Consumo(
 	PRIMARY KEY(idConsumo)
 );
 
+CREATE VIEW vwServicosPendentes AS
+SELECT s.descricao as Descrição, s.statusServico as Status, q.numero as NumeroQuarto
+FROM Servico s, Quarto q
+WHERE s.idQuarto = q.idQuarto and s.statusServico = 'PENDENTE';
+
+CREATE VIEW vwAvaliacoesPositivas AS
+SELECT p.nome as Nome, q.numero as NumeroQuarto, a.nota as Nota, a.comentario as Comentario
+FROM Pessoa p, Cliente c, Quarto q, Avaliacao a
+WHERE a.idCliente = c.idCliente and a.idQuarto = q.idQuarto and c.idPessoa = p.idPessoa;
 
 

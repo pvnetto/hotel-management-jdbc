@@ -1,25 +1,18 @@
 package controller;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import model.Address;
 import model.Employee;
-import model.Person;
-import model.Phone;
 
-public class EmployeeDAO {
-	
-	private Connection connection;
+public class EmployeeDAO extends AbstractDAO {
+
 	private PersonDAO personDAO;
 	
 	public EmployeeDAO() throws SQLException {
-		connection = DBConnection.getConnection();
-		connection.setAutoCommit(false);
-		
+		super();
 		personDAO = new PersonDAO();
 	}
 	
