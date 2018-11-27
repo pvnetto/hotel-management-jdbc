@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.Room;
+import model.RoomType;
 
 public class RoomDAO {
 	
@@ -16,11 +17,21 @@ public class RoomDAO {
 		connection.setAutoCommit(false);
 	}
 	
+	public void insertRoomType(RoomType roomType) throws SQLException {
+		String insertRoomTypeSQL = "INSERT INTO TipoQuarto VALUES(default, ?)";
+		PreparedStatement pst = connection.prepareStatement(insertRoomTypeSQL);
+		pst.setFloat(1, roomType.getDailyPrice());
+		pst.execute();
+		connection.commit();
+		pst.close();
+	}
+	
 	public void insertRoom(Room room) throws SQLException {
-		String insertRoomSQL = "INSERT INTO Quarto VALUES(default, ?)";
+		String insertRoomSQL = "INSERT INTO Quarto VALUES(default, ?, ?)";
 		PreparedStatement pst = connection.prepareStatement(insertRoomSQL);
 		
-		pst.setInt(1, room.getRoomNumber());
+		pst.setInt(1, room.getIdRoomType());
+		pst.setInt(2, room.getRoomNumber());
 		pst.execute();
 		connection.commit();
 		pst.close();

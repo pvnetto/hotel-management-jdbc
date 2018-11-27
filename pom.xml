@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>br.ufrn.imd</groupId>
-  <artifactId>Oficina_JDBC</artifactId>
+  <artifactId>hotel-management-jdbc</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
   <dependencies>
   	<dependency>
-	  	<groupId>postgresql</groupId>
+	  	<groupId>org.postgresql</groupId>
 	  	<artifactId>postgresql</artifactId>
-	  	<version>9.1-901.jdbc4</version>
+	  	<version>42.1.1</version>
   	</dependency>
   	
   </dependencies>

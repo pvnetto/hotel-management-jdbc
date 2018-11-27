@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.swing.text.DefaultEditorKit.InsertBreakAction;
-
 import model.Person;
 
 public class PersonDAO {

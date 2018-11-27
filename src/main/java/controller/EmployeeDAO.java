@@ -38,7 +38,7 @@ public class EmployeeDAO {
 		resultSet.next();
 		int fisicaID = resultSet.getInt(1);
 		
-		String empregadoSQL = "INSERT INTO Empregado values(default, ?, ?)";
+		String empregadoSQL = "INSERT INTO Funcionario values(default, ?, ?)";
 		pst = connection.prepareStatement(empregadoSQL);
 		pst.setInt(1, personID);
 		pst.setInt(2, fisicaID);
@@ -52,7 +52,7 @@ public class EmployeeDAO {
 	public Employee selectEmployeeByCPF(String cpf) throws SQLException {
 		Employee employee = new Employee();
 		
-		String selectEmployeeSQL = "SELECT e.idPessoa, e.idFisica FROM Empregado e, Fisica f WHERE f.cpf = ?";
+		String selectEmployeeSQL = "SELECT e.idFuncionario, e.idPessoa, e.idFisica FROM Funcionario e, Fisica f WHERE f.cpf = ?";
 		PreparedStatement preparedStatement = connection.prepareStatement(selectEmployeeSQL);
 		preparedStatement.setString(1, cpf);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -60,6 +60,7 @@ public class EmployeeDAO {
 		
 		int pessoaID = resultSet.getInt("idPessoa");
 		int fisicaID = resultSet.getInt("idFisica");
+		employee.setIdEmployee(resultSet.getInt("idFuncionario"));
 		employee.setIdPerson(pessoaID);
 		employee.setIdPhysicalPerson(fisicaID);
 		

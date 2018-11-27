@@ -5,12 +5,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.Address;
-import model.Admin;
 import model.Customer;
 import model.Employee;
 import model.Phone;
 import model.Room;
 import model.RoomService;
+import model.RoomType;
 
 public class Test {
 
@@ -18,7 +18,6 @@ public class Test {
 		try {
 			CustomerDAO customerDAO = new CustomerDAO();
 			EmployeeDAO employeeDAO = new EmployeeDAO();
-			AdminDAO adminDAO = new AdminDAO();
 			RoomDAO roomDAO = new RoomDAO();
 			RoomServiceDAO roomServiceDAO = new RoomServiceDAO();
 			
@@ -52,29 +51,19 @@ public class Test {
 			employee.setPhone(new Phone("948127398"));
 			employeeDAO.insertEmployee(employee);
 			
-			Admin admin = new Admin();
-			admin.setCnpj("04780732000100");
-			admin.setCompanyName("Hotel Natal LTDA");
-			admin.setEmail("hotel@gmail.com");
-			admin.setName("Hotel Nome Fantasia");
-			admin.setAddress(new Address("Rua do adm", "Bairro do adm", 2, "59054720", ""));
-			admin.setPhone(new Phone("36132707"));
-			adminDAO.insertAdmin(admin);
-			
-			List<Admin> admins = adminDAO.listAdmins();
-			
-			System.out.println("> Listing admins: ");
-			for (Admin adm : admins) {
-				System.out.println("> Admin name: " + adm.getName());
-			}
+			RoomType roomType0 = new RoomType(100.0f);
+			RoomType roomType1 = new RoomType(200.0f);
+			roomDAO.insertRoomType(roomType0);
+			roomDAO.insertRoomType(roomType1);
 			
 			for(int i = 0; i < 10; i++) {
 				Room room = new Room();
 				room.setRoomNumber(i + 1);
+				room.setIdRoomType(1);
 				roomDAO.insertRoom(room);
 			}
 			
-			RoomService roomService = new RoomService(roomDAO.selectRoomByNumber(5), admins.get(0), employeeDAO.selectEmployeeByCPF("41231232131"), "Clean the room.");
+			RoomService roomService = new RoomService(roomDAO.selectRoomByNumber(5), employeeDAO.selectEmployeeByCPF("41231232131"), "Clean the room.");
 			
 			roomServiceDAO.insertRoomService(roomService);
 			
