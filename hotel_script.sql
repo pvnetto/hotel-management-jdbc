@@ -112,6 +112,10 @@ CREATE TABLE Consumo(
 	PRIMARY KEY(idConsumo)
 );
 
+CREATE INDEX data_indice ON Reserva USING BTREE(dataInicio, dataFim);
+CREATE INDEX cpf_indice ON Fisica USING HASH (cpf);
+
+
 CREATE VIEW vwServicosPendentes AS
 SELECT s.descricao as Descrição, s.statusServico as Status, q.numero as NumeroQuarto
 FROM Servico s, Quarto q
@@ -120,6 +124,6 @@ WHERE s.idQuarto = q.idQuarto and s.statusServico = 'PENDENTE';
 CREATE VIEW vwAvaliacoesPositivas AS
 SELECT p.nome as Nome, q.numero as NumeroQuarto, a.nota as Nota, a.comentario as Comentario
 FROM Pessoa p, Cliente c, Quarto q, Avaliacao a
-WHERE a.idCliente = c.idCliente and a.idQuarto = q.idQuarto and c.idPessoa = p.idPessoa;
+WHERE a.idCliente = c.idCliente and a.idQuarto = q.idQuarto and c.idPessoa = p.idPessoa and a.nota >= 4;
 
 
