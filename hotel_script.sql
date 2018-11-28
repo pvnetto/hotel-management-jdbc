@@ -1,4 +1,4 @@
-﻿DROP SCHEMA public CASCADE;
+DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
 
 CREATE TABLE Pessoa (
@@ -60,6 +60,7 @@ CREATE TABLE Juridica (
 CREATE TABLE TipoQuarto (
 	idTipoQuarto SERIAL NOT NULL,
 	valorDiaria FLOAT NOT NULL,
+	descricao VARCHAR(45) NOT NULL UNIQUE,
 	PRIMARY KEY(idTipoQuarto)
 );
 

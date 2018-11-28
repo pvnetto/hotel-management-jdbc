@@ -60,8 +60,8 @@ public class Test {
 			employee.setPhone(new Phone("948127398"));
 			employeeDAO.insertEmployee(employee);
 			
-			RoomType roomType0 = new RoomType(100.0f);
-			RoomType roomType1 = new RoomType(200.0f);
+			RoomType roomType0 = new RoomType(100.0f, "Barato");
+			RoomType roomType1 = new RoomType(200.0f, "Caro");
 			roomDAO.insertRoomType(roomType0);
 			roomDAO.insertRoomType(roomType1);
 			

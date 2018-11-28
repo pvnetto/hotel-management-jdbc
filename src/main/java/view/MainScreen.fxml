@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainController">
    <top>
       <VBox prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -75,18 +75,17 @@
          <children>
             <VBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Button minHeight="50.0" minWidth="180.0" mnemonicParsing="false" prefWidth="180.0" text="Insert Customer" />
-                  <Button minHeight="50.0" minWidth="180.0" mnemonicParsing="false" prefWidth="180.0" text="Insert Employee" />
-                  <Button layoutX="110.0" layoutY="170.0" minHeight="50.0" minWidth="180.0" mnemonicParsing="false" prefWidth="180.0" text="Insert Room Type" />
-                  <Button layoutX="110.0" layoutY="188.0" minHeight="50.0" minWidth="180.0" mnemonicParsing="false" prefWidth="180.0" text="Insert Room" />
+                  <Button minHeight="50.0" minWidth="180.0" mnemonicParsing="false" onAction="#ClickInsertCustomer" prefWidth="180.0" text="Insert Customer" />
+                  <Button minHeight="50.0" minWidth="180.0" mnemonicParsing="false" onAction="#ClickInsertEmployee" prefWidth="180.0" text="Insert Employee" />
+                  <Button layoutX="110.0" layoutY="188.0" minHeight="50.0" minWidth="180.0" mnemonicParsing="false" onAction="#ClickInsertRoom" prefWidth="180.0" text="Insert Room" />
                </children>
             </VBox>
             <VBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="1">
                <children>
-                  <Button minHeight="50.0" minWidth="180.0" mnemonicParsing="false" prefWidth="180.0" text="Insert Room Service" />
-                  <Button minHeight="50.0" minWidth="180.0" mnemonicParsing="false" prefWidth="180.0" text="Insert Booking" />
-                  <Button minHeight="50.0" minWidth="180.0" mnemonicParsing="false" prefWidth="180.0" text="Insert Consumption" />
-                  <Button layoutX="120.0" layoutY="170.0" minHeight="50.0" minWidth="180.0" mnemonicParsing="false" prefWidth="180.0" text="Insert Rating" />
+                  <Button minHeight="50.0" minWidth="180.0" mnemonicParsing="false" onAction="#ClickInsertRoomService" prefWidth="180.0" text="Insert Room Service" />
+                  <Button minHeight="50.0" minWidth="180.0" mnemonicParsing="false" onAction="#ClickInsertBooking" prefWidth="180.0" text="Insert Booking" />
+                  <Button minHeight="50.0" minWidth="180.0" mnemonicParsing="false" onAction="#ClickInsertConsumption" prefWidth="180.0" text="Insert Consumption" />
+                  <Button layoutX="120.0" layoutY="170.0" minHeight="50.0" minWidth="180.0" mnemonicParsing="false" onAction="#ClickInsertRating" prefWidth="180.0" text="Insert Rating" />
                </children>
             </VBox>
          </children>

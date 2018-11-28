@@ -14,9 +14,10 @@ public class RoomDAO extends AbstractDAO {
 	}
 
 	public void insertRoomType(RoomType roomType) throws SQLException {
-		String insertRoomTypeSQL = "INSERT INTO TipoQuarto VALUES(default, ?)";
+		String insertRoomTypeSQL = "INSERT INTO TipoQuarto VALUES(default, ?, ?)";
 		PreparedStatement pst = connection.prepareStatement(insertRoomTypeSQL);
 		pst.setFloat(1, roomType.getDailyPrice());
+		pst.setString(2, roomType.getDescription());
 		pst.execute();
 		connection.commit();
 		pst.close();
