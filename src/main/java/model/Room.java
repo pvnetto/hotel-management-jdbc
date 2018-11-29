@@ -5,7 +5,6 @@ public class Room {
 	private int idRoom;
 	private int idRoomType;
 	private int roomNumber;
-	private boolean isBusy;
 	
 	public int getIdRoom() {
 		return idRoom;
@@ -29,14 +28,6 @@ public class Room {
 	
 	public void setRoomNumber(int roomNumber) {
 		this.roomNumber = roomNumber;
-	}
-	
-	public boolean isBusy() {
-		return isBusy;
-	}
-	
-	public void setBusy(boolean isBusy) {
-		this.isBusy = isBusy;
 	}
 	
 }

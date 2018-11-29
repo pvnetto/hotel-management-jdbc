@@ -28,7 +28,8 @@ public class MainView extends Application {
 			mainScreen = (BorderPane) loader.load();
 			
 			// Showing the scene that contains the layout
-			Scene scene = new Scene(mainScreen, 800, 600);
+			Scene scene = new Scene(mainScreen);
+			//Scene scene = new Scene(mainScreen, 800, 600);
 			first.setScene(scene);
 			first.show();
 		}

@@ -6,6 +6,7 @@ public class Booking {
 	private int idBooking;
 	private int idCustomer;
 	private int idRoom;
+	private int idBill;
 	private Date startDate;
 	private Date endDate;
 	
@@ -40,6 +41,14 @@ public class Booking {
 		this.idRoom = idRoom;
 	}
 	
+	public int getIdBill() {
+		return idBill;
+	}
+
+	public void setIdBill(int idBill) {
+		this.idBill = idBill;
+	}
+
 	public Date getStartDate() {
 		return startDate;
 	}

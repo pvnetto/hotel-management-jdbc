@@ -1,4 +1,4 @@
-DROP SCHEMA public CASCADE;
+﻿DROP SCHEMA public CASCADE;
 CREATE SCHEMA public;
 
 CREATE TABLE Pessoa (
@@ -89,20 +89,20 @@ CREATE TABLE Avaliacao (
 	PRIMARY KEY(idAvaliacao)
 );
 
+CREATE TABLE Conta (
+	idConta SERIAL NOT NULL,
+	valorTotal FLOAT NOT NULL,
+	PRIMARY KEY(idConta)
+);
+
 CREATE TABLE Reserva (
 	idReserva SERIAL NOT NULL,
 	idCliente INTEGER NOT NULL REFERENCES Cliente,
 	idQuarto INTEGER NOT NULL REFERENCES Quarto,
+	idConta INTEGER NOT NULL REFERENCES Conta,
 	dataInicio DATE NOT NULL,
 	dataFim DATE NOT NULL,
 	PRIMARY KEY(idReserva)
-);
-
-CREATE TABLE Conta (
-	idConta SERIAL NOT NULL,
-	idReserva INTEGER NOT NULL REFERENCES Reserva,
-	valorTotal FLOAT NOT NULL,
-	PRIMARY KEY(idConta)
 );
 
 CREATE TABLE Consumo(

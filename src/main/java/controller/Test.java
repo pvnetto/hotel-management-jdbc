@@ -73,20 +73,18 @@ public class Test {
 			}
 			
 			RoomService roomService = new RoomService(roomDAO.selectRoomByNumber(5), employeeDAO.selectEmployeeByCPF("41231232131"), "Clean the room.", ServiceStatus.PENDENTE);
-			
 			roomServiceDAO.insertRoomService(roomService);
+			
+			Bill bill = new Bill(0.0f);
+			int billID = billDAO.insertBill(bill);
 			
 			Booking booking = new Booking(new Date(2017, 8, 27), new Date(2017, 8, 29));
 			Customer bookingCustomer = customerDAO.selectCustomerByCPF("4213123124");
 			Room room = roomDAO.selectRoomByNumber(3);
 			booking.setIdCustomer(bookingCustomer.getIdCustomer());
 			booking.setIdRoom(room.getIdRoom());
+			booking.setIdBill(billID);
 			bookingDAO.insertBooking(booking);
-			
-			Bill bill = new Bill(0.0f);
-			Booking billBooking = bookingDAO.selectBookingByDateAndRoomNumber(3, new Date(2017, 8, 28));
-			bill.setIdBooking(billBooking.getIdBooking());
-			billDAO.insertBill(bill);
 			
 			Consumption consumption = new Consumption(100.0f, "A bottle of champagne.");
 			Bill consumptionBill = billDAO.selectBillByDateAndRoomNumber(3, new Date(2017, 8, 28));
@@ -99,9 +97,8 @@ public class Test {
 			rating.setIdCustomer(ratingCustomer.getIdCustomer());
 			rating.setIdRoom(ratedRoom.getIdRoom());
 			ratingDAO.insertRating(rating);
-			
-			
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		

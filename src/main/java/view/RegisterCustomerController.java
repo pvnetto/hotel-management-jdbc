@@ -2,6 +2,7 @@ package view;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import controller.CustomerDAO;
@@ -76,6 +77,7 @@ public class RegisterCustomerController implements Initializable {
 		numberTxt.setText("");
 		cepTxt.setText("");
 		address2Txt.setText("");
+		phoneTxt.setText("");
 	}
 	
 }

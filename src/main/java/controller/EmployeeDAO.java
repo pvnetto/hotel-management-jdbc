@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Employee;
 
@@ -12,7 +14,6 @@ public class EmployeeDAO extends AbstractDAO {
 	private PersonDAO personDAO;
 	
 	public EmployeeDAO() throws SQLException {
-		super();
 		personDAO = new PersonDAO();
 	}
 	
@@ -40,6 +41,30 @@ public class EmployeeDAO extends AbstractDAO {
 		connection.commit();
 		pst.close();
 		System.out.println("> Successfully inserted " + employee.getName() + " as an employee!");
+	}
+	
+	public List<Employee> selectAllEmployees() throws SQLException {
+		String selectAllEmployeesSQL = "SELECT e.idFuncionario, e.idPessoa, e.idFisica, p.nome, p.email, f.cpf, f.rg, f.dataNascimento FROM Funcionario e, Fisica f, Pessoa p WHERE e.idPessoa = p.idPessoa and e.idFisica = f.idFisica";
+		PreparedStatement pst = connection.prepareStatement(selectAllEmployeesSQL);
+		
+		ResultSet resultSet = pst.executeQuery();
+		
+		List<Employee> employees = new ArrayList<Employee>();
+		while(resultSet.next()) {
+			Employee employee = new Employee();
+			employee.setIdEmployee(resultSet.getInt("idFuncionario"));
+			employee.setIdPerson(resultSet.getInt("idPessoa"));
+			employee.setIdPhysicalPerson(resultSet.getInt("idFisica"));
+			employee.setName(resultSet.getString("nome"));
+			employee.setEmail(resultSet.getString("email"));
+			employee.setCpf(resultSet.getString("cpf"));
+			employee.setRg(resultSet.getString("rg"));
+			employee.setBirthDate(resultSet.getDate("dataNascimento"));
+			
+			employees.add(employee);
+		}
+		
+		return employees;
 	}
 	
 	public Employee selectEmployeeByCPF(String cpf) throws SQLException {

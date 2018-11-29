@@ -15,12 +15,13 @@ public class BookingDAO extends AbstractDAO {
 	}
 
 	public void insertBooking(Booking booking) throws SQLException {
-		String insertBookingSQL = "INSERT INTO Reserva values(default, ?, ?, ?, ?)";
+		String insertBookingSQL = "INSERT INTO Reserva values(default, ?, ?, ?, ?, ?)";
 		PreparedStatement pst = connection.prepareStatement(insertBookingSQL);
 		pst.setInt(1, booking.getIdCustomer());
 		pst.setInt(2, booking.getIdRoom());
-		pst.setDate(3, booking.getStartDate());
-		pst.setDate(4, booking.getEndDate());
+		pst.setInt(3, booking.getIdBill());
+		pst.setDate(4, booking.getStartDate());
+		pst.setDate(5, booking.getEndDate());
 		
 		pst.execute();
 		connection.commit();

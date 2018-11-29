@@ -17,11 +17,12 @@ public class MainController {
 			BorderPane customerScreen = (BorderPane) loader.load();
 			
 			// Showing the scene that contains the layout
-			Scene scene = new Scene(customerScreen, 600, 400);
-			Stage customerStage = new Stage();
-			customerStage.setScene(scene);
-			customerStage.setTitle(screenTitle);
-			customerStage.show();
+			//Scene scene = new Scene(customerScreen, 800, 500);
+			Scene scene = new Scene(customerScreen);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+			stage.setTitle(screenTitle);
+			stage.show();
 			
 			scene.setRoot(customerScreen);
 		}
@@ -44,19 +45,19 @@ public class MainController {
 	}
 	
 	public void ClickInsertRoomService() {
-		
+		LoadScene("RegisterRoomServiceScreen.fxml", "Register room service");
 	}
 	
 	public void ClickInsertBooking() {
-		
+		LoadScene("RegisterBookingScreen.fxml", "Register booking");
 	}
 	
 	public void ClickInsertConsumption() {
-		
+		LoadScene("RegisterConsumptionScreen.fxml", "Register consumption");
 	}
 	
 	public void ClickInsertRating() {
-		
+		LoadScene("RegisterRatingScreen.fxml", "Register rating");
 	}
 	
 }

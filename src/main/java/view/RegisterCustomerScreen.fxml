@@ -17,7 +17,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegisterCustomerController">
    <top>
-      <VBox prefWidth="600.0" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
             <MenuBar prefHeight="18.0" prefWidth="600.0">
               <menus>
@@ -47,7 +47,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
          <children>
-            <GridPane alignment="CENTER" prefHeight="311.0" prefWidth="580.0">
+            <GridPane alignment="CENTER">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
@@ -100,7 +100,7 @@
             </GridPane>
             <HBox alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#registerCustomer" prefHeight="25.0" prefWidth="72.0" text="Register" />
+                  <Button mnemonicParsing="false" onAction="#registerCustomer" text="Register" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

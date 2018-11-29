@@ -47,7 +47,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
          <children>
-            <GridPane alignment="CENTER" prefHeight="311.0" prefWidth="580.0">
+            <GridPane alignment="CENTER">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
@@ -100,8 +100,14 @@
             </GridPane>
             <HBox alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#registerEmployee" prefHeight="25.0" prefWidth="72.0" text="Register" />
+                  <Button mnemonicParsing="false" onAction="#registerEmployee" text="Register" />
                </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </HBox>
          </children>
       </VBox>

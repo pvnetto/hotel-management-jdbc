@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegisterRoomController">
    <top>
       <VBox prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -76,8 +76,8 @@
                         </VBox>
                         <VBox alignment="CENTER" layoutX="174.0" layoutY="10.0" prefHeight="294.0" prefWidth="65.0" spacing="20.0" GridPane.columnIndex="1">
                            <children>
-                              <TextField fx:id="cepTxt1" layoutX="10.0" layoutY="216.0" />
-                              <TextField fx:id="address2Txt1" layoutX="10.0" layoutY="185.0" />
+                              <TextField fx:id="roomValueTxt" layoutX="10.0" layoutY="216.0" />
+                              <TextField fx:id="roomDescriptionTxt" layoutX="10.0" layoutY="185.0" />
                            </children>
                            <GridPane.margin>
                               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
@@ -85,9 +85,9 @@
                         </VBox>
                      </children>
                   </GridPane>
-                  <HBox alignment="CENTER">
+                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="244.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Register" />
+                        <Button mnemonicParsing="false" onAction="#registerRoomTypeClick" text="Register" />
                      </children>
                      <padding>
                         <Insets bottom="8.0" />
@@ -117,8 +117,8 @@
                         </VBox>
                         <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="20.0" GridPane.columnIndex="1">
                            <children>
-                              <ChoiceBox />
-                              <TextField fx:id="emailTxt" />
+                              <ChoiceBox fx:id="roomTypeBox" />
+                              <TextField fx:id="roomNumberTxt" />
                            </children>
                            <GridPane.margin>
                               <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
@@ -128,7 +128,7 @@
                   </GridPane>
                   <HBox alignment="CENTER">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Register" />
+                        <Button mnemonicParsing="false" onAction="#registerRoomClick" text="Register" />
                      </children>
                      <padding>
                         <Insets bottom="8.0" />
