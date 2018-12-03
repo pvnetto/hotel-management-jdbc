@@ -1,12 +1,15 @@
 package controller;
 
-import java.awt.List;
+import java.awt.print.Book;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Booking;
+import model.Customer;
 
 public class BookingDAO extends AbstractDAO {
 	
@@ -15,13 +18,13 @@ public class BookingDAO extends AbstractDAO {
 	}
 
 	public void insertBooking(Booking booking) throws SQLException {
-		String insertBookingSQL = "INSERT INTO Reserva values(default, ?, ?, ?, ?, ?)";
+		String insertBookingSQL = "INSERT INTO Reserva values(default, ?, ?, null, ?, ?)";
 		PreparedStatement pst = connection.prepareStatement(insertBookingSQL);
 		pst.setInt(1, booking.getIdCustomer());
 		pst.setInt(2, booking.getIdRoom());
-		pst.setInt(3, booking.getIdBill());
-		pst.setDate(4, booking.getStartDate());
-		pst.setDate(5, booking.getEndDate());
+		//pst.setInt(3, booking.getIdBill());
+		pst.setDate(3, booking.getStartDate());
+		pst.setDate(4, booking.getEndDate());
 		
 		pst.execute();
 		connection.commit();
@@ -44,6 +47,53 @@ public class BookingDAO extends AbstractDAO {
 		
 		connection.commit();
 		pst.close();
+		
+		return booking;
+	}
+	
+	public List<Booking> selectBookingsByCustomer(Customer customer) throws SQLException {
+		String selectBookingsSQL = "SELECT r.idReserva, r.idCliente, r.idConta, r.idQuarto, r.dataInicio, r.dataFim FROM Reserva r WHERE r.idCliente = ?";
+		PreparedStatement pst = connection.prepareStatement(selectBookingsSQL);
+		pst.setInt(1, customer.getIdCustomer());
+		
+		ResultSet resultSet = pst.executeQuery();
+		
+		List<Booking> bookings = new ArrayList<Booking>();
+		
+		while(resultSet.next()) {
+			Booking booking = new Booking();
+			booking.setIdBooking(resultSet.getInt("idReserva"));
+			booking.setIdCustomer(resultSet.getInt("idCliente"));
+			booking.setIdBill(resultSet.getInt("idConta"));
+			booking.setIdRoom(resultSet.getInt("idQuarto"));
+			booking.setStartDate(resultSet.getDate("dataInicio"));
+			booking.setEndDate(resultSet.getDate("dataFim"));
+			
+			bookings.add(booking);
+		}
+		
+		connection.commit();
+		pst.close();
+		
+		return bookings;
+	}
+	
+	public Booking selectBookingByID(int bookingID) throws SQLException {
+		String selectBookingSQL = "SELECT r.idReserva, r.idCliente, r.idConta, r.idQuarto, r.dataInicio, r.dataFim FROM Reserva r WHERE r.idReserva = ?";
+		PreparedStatement pst = connection.prepareStatement(selectBookingSQL);
+		pst.setInt(1, bookingID);
+		
+		ResultSet resultSet = pst.executeQuery();
+		
+		Booking booking = new Booking();
+		if(resultSet.next()) {
+			booking.setIdBooking(resultSet.getInt("idReserva"));
+			booking.setIdCustomer(resultSet.getInt("idCliente"));
+			booking.setIdBill(resultSet.getInt("idConta"));
+			booking.setIdRoom(resultSet.getInt("idQuarto"));
+			booking.setStartDate(resultSet.getDate("dataInicio"));
+			booking.setEndDate(resultSet.getDate("dataFim"));
+		}
 		
 		return booking;
 	}

@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.RoomService;
@@ -23,6 +24,27 @@ public class RoomServiceDAO extends AbstractDAO {
 		connection.commit();
 		pst.close();
 		System.out.println("> Room Service successfully added to room #" + roomService.getRoom().getRoomNumber() + ", employee " + roomService.getEmployee().getName());
+	}
+	
+	public void viewPendingServices() throws SQLException {
+		String viewPendingServicesSQL = "SELECT * FROM vwServicosPendentes";
+		PreparedStatement pst = connection.prepareStatement(viewPendingServicesSQL);
+		
+		ResultSet resultSet = pst.executeQuery();
+		
+		System.out.println("> Listing pending services: ");
+		System.out.println("=========");
+		while(resultSet.next()) {
+			System.out.println("Quarto #" + resultSet.getInt("NumeroQuarto"));
+			System.out.println("Descrição: " + resultSet.getString("Descrição"));
+			System.out.println("Status: " + resultSet.getString("Status"));
+			System.out.println("=========");
+		}
+		
+		connection.commit();
+		pst.close();
+		
+		System.out.println("> Finished printing vwServicosPendentes");
 	}
 	
 }

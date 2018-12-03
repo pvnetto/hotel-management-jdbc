@@ -60,4 +60,8 @@ public class MainController {
 		LoadScene("RegisterRatingScreen.fxml", "Register rating");
 	}
 	
+	public void ClickDeleteConsumption() {
+		LoadScene("DeleteConsumptionScreen.fxml", "Delete Consumption");
+	}
+	
 }

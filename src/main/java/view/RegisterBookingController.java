@@ -60,12 +60,12 @@ public class RegisterBookingController implements Initializable {
 	}
 	
 	public void registerBooking() throws SQLException {
-		Bill bill = new Bill();
-		bill.setTotalValue(0.0f);
-		int billID = billDAO.insertBill(bill);
+		//Bill bill = new Bill();
+		//bill.setTotalValue(0.0f);
+		//int billID = billDAO.insertBill(bill);
 		
 		Booking booking = new Booking();
-		booking.setIdBill(billID);
+		//booking.setIdBill(billID);
 		booking.setStartDate(java.sql.Date.valueOf(startDatePicker.getValue()));
 		booking.setEndDate(java.sql.Date.valueOf(endDatePicker.getValue()));
 		

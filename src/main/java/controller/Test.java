@@ -75,33 +75,42 @@ public class Test {
 			RoomService roomService = new RoomService(roomDAO.selectRoomByNumber(5), employeeDAO.selectEmployeeByCPF("41231232131"), "Clean the room.", ServiceStatus.PENDENTE);
 			roomServiceDAO.insertRoomService(roomService);
 			
-			Bill bill = new Bill(0.0f);
-			int billID = billDAO.insertBill(bill);
+			RoomService roomService2 = new RoomService(roomDAO.selectRoomByNumber(2), employeeDAO.selectEmployeeByCPF("41231232131"), "Clean the bathroom", ServiceStatus.PENDENTE);
+			roomServiceDAO.insertRoomService(roomService2);
+			
+			//Bill bill = new Bill(0.0f);
+			//int billID = billDAO.insertBill(bill);
+			
+			System.out.println(billDAO.selectAllBills().size());
 			
 			Booking booking = new Booking(new Date(2017, 8, 27), new Date(2017, 8, 29));
 			Customer bookingCustomer = customerDAO.selectCustomerByCPF("4213123124");
 			Room room = roomDAO.selectRoomByNumber(3);
 			booking.setIdCustomer(bookingCustomer.getIdCustomer());
 			booking.setIdRoom(room.getIdRoom());
-			booking.setIdBill(billID);
 			bookingDAO.insertBooking(booking);
+			
+			System.out.println(billDAO.selectAllBills().size());
 			
 			Consumption consumption = new Consumption(100.0f, "A bottle of champagne.");
 			Bill consumptionBill = billDAO.selectBillByDateAndRoomNumber(3, new Date(2017, 8, 28));
 			consumption.setIdBill(consumptionBill.getIdBill());
 			consumptionDAO.insertConsumption(consumption);
 			
+
+			List<Booking> ratedBookings = bookingDAO.selectBookingsByCustomer(bookingCustomer);
+					
 			Rating rating = new Rating(5, "Muito bom!");
-			Customer ratingCustomer = customerDAO.selectCustomerByCPF("12041654406");
-			Room ratedRoom = roomDAO.selectRoomByNumber(5);
-			rating.setIdCustomer(ratingCustomer.getIdCustomer());
-			rating.setIdRoom(ratedRoom.getIdRoom());
+			rating.setIdBooking(ratedBookings.get(0).getIdBooking());
+			rating.setRatingDate(new Date(2017, 8, 30));
 			ratingDAO.insertRating(rating);
-		} 
+			
+			roomServiceDAO.viewPendingServices();
+			ratingDAO.viewPositiveRatings();
+		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		
 	}
 

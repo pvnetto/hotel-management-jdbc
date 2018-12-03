@@ -5,42 +5,43 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.swing.event.ChangeListener;
 
+import controller.BookingDAO;
 import controller.CustomerDAO;
 import controller.RatingDAO;
-import controller.RoomDAO;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
+import model.Booking;
 import model.Customer;
 import model.Rating;
-import model.Room;
 
 public class RegisterRatingController implements Initializable {
 
 	@FXML
 	private ChoiceBox<String> customerBox;
 	@FXML
-	private ChoiceBox<Integer> roomNumberBox;
+	private ChoiceBox<Integer> bookingBox;
 	@FXML
 	private ChoiceBox<Integer> starsBox;
 	@FXML
 	private TextArea commentTxt;
+	@FXML
+	private DatePicker ratingDatePicker;
 	
 	private CustomerDAO customerDAO;
-	private RoomDAO roomDAO;
+	private BookingDAO bookingDAO;
 	private RatingDAO ratingDAO;
 	
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
 			customerDAO = new CustomerDAO();
-			roomDAO = new RoomDAO();
+			bookingDAO = new BookingDAO();
 			ratingDAO = new RatingDAO();
 			
 			starsBox.setItems(FXCollections.observableArrayList(1, 2, 3, 4, 5));
@@ -50,7 +51,7 @@ public class RegisterRatingController implements Initializable {
 				customerBox.setValue(customerBox.getItems().get(0));
 			}
 			
-			updateRoomForm();
+			updateBookingForm();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -58,44 +59,43 @@ public class RegisterRatingController implements Initializable {
 		
 		customerBox.setOnAction(event -> {
 			try {
-				updateRateableRooms(event);
+				updateRateableBookings(event);
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
 	}
 	
 	public void registerRating() throws SQLException {
+		Booking booking = bookingDAO.selectBookingByID(bookingBox.getValue());
 		Rating rating = new Rating(starsBox.getValue(), commentTxt.getText());
-		Customer ratingCustomer = customerDAO.selectCustomerByCPF(customerBox.getValue());
-		Room ratedRoom = roomDAO.selectRoomByNumber(roomNumberBox.getValue());
-		rating.setIdCustomer(ratingCustomer.getIdCustomer());
-		rating.setIdRoom(ratedRoom.getIdRoom());
+		rating.setRatingDate(java.sql.Date.valueOf(ratingDatePicker.getValue()));
+		rating.setIdBooking(booking.getIdBooking());
+		
 		ratingDAO.insertRating(rating);
 		resetForm();
 	}
 	
 	@FXML
-	public void updateRateableRooms(ActionEvent event) throws SQLException {
-		updateRoomForm();
+	public void updateRateableBookings(ActionEvent event) throws SQLException {
+		updateBookingForm();
 	}
 	
-	private void updateRoomForm() throws SQLException {
+	private void updateBookingForm() throws SQLException {
 		Customer customer = customerDAO.selectCustomerByCPF(customerBox.getValue());
 		
-		roomNumberBox.setItems(getRoomNumbers(customer.getIdCustomer()));
-		if(roomNumberBox.getItems().size() > 0) {
-			roomNumberBox.setValue(roomNumberBox.getItems().get(0));
+		bookingBox.setItems(getBookingsID(customer));
+		if(bookingBox.getItems().size() > 0) {
+			bookingBox.setValue(bookingBox.getItems().get(0));
 		}
 	}
 	
-	private ObservableList<Integer> getRoomNumbers(int customerID) throws SQLException{
+	private ObservableList<Integer> getBookingsID(Customer customer) throws SQLException{
 		ObservableList<Integer> numbers = FXCollections.observableArrayList();
-		List<Room> rooms = roomDAO.selectAllRoomsRentedByCustomer(customerID);
+		List<Booking> bookings = bookingDAO.selectBookingsByCustomer(customer);
 		
-		for (Room room : rooms) {
-			numbers.add(room.getRoomNumber());
+		for (Booking booking : bookings) {
+			numbers.add(booking.getIdBooking());
 		}
 		
 		return numbers;

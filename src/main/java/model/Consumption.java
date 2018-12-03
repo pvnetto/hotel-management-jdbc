@@ -7,6 +7,8 @@ public class Consumption {
 	private float value;
 	private String description;
 	
+	public Consumption() {}
+	
 	public Consumption(float value, String description) {
 		this.value = value;
 		this.description = description;

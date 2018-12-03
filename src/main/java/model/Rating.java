@@ -1,40 +1,27 @@
 package model;
 
+import java.sql.Date;
+
 public class Rating {
 	
-	private int idRating;
-	private int idRoom;
-	private int idCustomer;
+	private int idBooking;
 	private int stars;
 	private String comment;
+	private Date ratingDate;
+	
+	public Rating() {}
 	
 	public Rating(int stars, String comment) {
 		this.stars = stars;
 		this.comment = comment;
 	}
-	
-	public int getIdRating() {
-		return idRating;
-	}
-	
-	public void setIdRating(int idRating) {
-		this.idRating = idRating;
-	}
-	
-	public int getIdRoom() {
-		return idRoom;
+
+	public int getIdBooking() {
+		return idBooking;
 	}
 
-	public void setIdRoom(int idRoom) {
-		this.idRoom = idRoom;
-	}
-
-	public int getIdCustomer() {
-		return idCustomer;
-	}
-
-	public void setIdCustomer(int idCustomer) {
-		this.idCustomer = idCustomer;
+	public void setIdBooking(int idBooking) {
+		this.idBooking = idBooking;
 	}
 
 	public int getStars() {
@@ -51,6 +38,14 @@ public class Rating {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public Date getRatingDate() {
+		return ratingDate;
+	}
+
+	public void setRatingDate(Date ratingDate) {
+		this.ratingDate = ratingDate;
 	}
 	
 }

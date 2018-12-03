@@ -77,9 +77,7 @@ public class CustomerDAO extends AbstractDAO {
 		
 		ResultSet resultSet = pst.executeQuery();
 		
-		if(resultSet.next()) {
-			resultSet.next();
-			
+		if(resultSet.next()) {			
 			customer.setIdCustomer(resultSet.getInt("idCliente"));	
 		}
 		

@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.spi.DirStateFactory.Result;
 
@@ -35,6 +37,25 @@ public class BillDAO extends AbstractDAO {
 		return billID;
 	}
 	
+	public List<Bill> selectAllBills() throws SQLException {
+		String selectBillSQL = "SELECT c.idConta FROM Conta c";
+		PreparedStatement pst = connection.prepareStatement(selectBillSQL);
+		
+		ResultSet resultSet = pst.executeQuery();
+		
+		List<Bill> bills = new ArrayList<Bill>();
+		while(resultSet.next()) {
+			Bill bill = new Bill();
+			bill.setIdBill(resultSet.getInt("idConta"));
+			bills.add(bill);
+		}
+		
+		connection.commit();
+		pst.close();
+		
+		return bills;
+	}
+	
 	public Bill selectBillByDateAndRoomNumber(int roomNumber, Date date) throws SQLException {
 		String selectBillSQL = "SELECT c.idConta"
 							 + " FROM Conta c, Reserva r, Quarto q"
@@ -44,10 +65,10 @@ public class BillDAO extends AbstractDAO {
 		pst.setDate(2, date);
 		
 		ResultSet resultSet = pst.executeQuery();
-		resultSet.next();
-		
 		Bill bill = new Bill();
-		bill.setIdBill(resultSet.getInt("idConta"));
+		if(resultSet.next()) {
+			bill.setIdBill(resultSet.getInt("idConta"));
+		}
 		
 		connection.commit();
 		pst.close();
